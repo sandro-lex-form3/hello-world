@@ -2,10 +2,18 @@ stages:
   - test
   - build
 
-job:
-  stage: test
+build:
   tags:
-    - test
+    - ubuntu
+  stage: build
   script:
-    - make test
-  
+    - echo "cat /etc/os-release"
+    - echo "going to compile"
+    #- make build
+
+test:
+  tags:
+    - ubuntu
+  stage: test
+  script:
+    - echo "going to test"
