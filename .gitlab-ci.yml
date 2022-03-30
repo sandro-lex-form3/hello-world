@@ -16,7 +16,7 @@ build_a:
     - id
   artifacts:
     paths:
-      bin/hello
+      - bin/hello
 
 
 build_b:
