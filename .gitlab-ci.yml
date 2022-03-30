@@ -25,6 +25,9 @@ build_a:
 
 
 build_b:
+  tags:
+    clean
+  image: ubuntu:20.04
   stage: build
   script:
     - echo "This job builds something else."
