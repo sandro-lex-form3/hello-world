@@ -8,8 +8,8 @@ default:
     - clean
   image: ubuntu:20.04
   services:
-    name: nginx
-    alias: mock
+    - name: nginx
+      alias: mock
 
 build_a:
   image: golang:latest
