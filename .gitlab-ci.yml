@@ -1,50 +1,56 @@
 stages:
   - build
   - test
-  - deploy
 
-image: alpine
+# image: alpine
+default:
+  tags:
+    - clean
+  image: ubuntu:20.04
+  services:
+    - name: nginx
+      alias: mock
 
 build_a:
+  image: golang:latest
   stage: build
   script:
     - echo "This job builds something."
+    - ls
+    - make build
+    - id
+  artifacts:
+    paths:
+      - bin/hello
+
 
 build_b:
   tags:
-    - ubuntu
+    - clean
+  image: ubuntu:20.04
   stage: build
   script:
     - echo "This job builds something else."
+    - apt-get update -y
+    - apt-get install -y docker.io
+    - docker ps -a
+    - curl -i mock
 
+build_c:
+  parallel: 2
+  image: alpine:latest
+  stage: build
+  script:
+    echo "final build step running.."
+  
 test_a:
-  tags:
-    - ubuntu
   stage: test
   script:
     - echo "This job tests something. It will only run when all jobs in the"
     - echo "build stage are complete."
 
 test_b:
-  tags:
-    - ubuntu
   stage: test
   script:
     - echo "This job tests something else. It will only run when all jobs in the"
     - echo "build stage are complete too. It will start at about the same time as test_a."
-
-deploy_a:
-  tags:
-    - ubuntu
-  stage: deploy
-  script:
-    - echo "This job deploys something. It will only run when all jobs in the"
-    - echo "test stage complete."
-
-deploy_b:
-  tags:
-    - ubuntu
-  stage: deploy
-  script:
-    - echo "This job deploys something else. It will only run when all jobs in the"
-    - echo "test stage complete. It will start at about the same time as deploy_a."
