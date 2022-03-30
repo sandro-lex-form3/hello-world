@@ -14,7 +14,7 @@ build_a:
     - ls
     - make build
     - id
-  artifact:
+  artifacts:
     paths:
       bin/hello
 
