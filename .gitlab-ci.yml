@@ -13,7 +13,11 @@ build_a:
     - echo "This job builds something."
     - ls
     - make build
-    - sleep 1000
+    - id
+  artifact:
+    paths:
+      bin/hello
+
 
 build_b:
   tags:
