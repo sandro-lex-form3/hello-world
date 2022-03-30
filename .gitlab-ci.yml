@@ -7,9 +7,12 @@ stages:
 build_a:
   tags:
     - clean
+  image: golang:latest
   stage: build
   script:
     - echo "This job builds something."
+    - ls
+    - make build
 
 build_b:
   tags:
