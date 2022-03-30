@@ -6,21 +6,21 @@ stages:
 
 build_a:
   tags:
-    - ubuntu
+    - clean
   stage: build
   script:
     - echo "This job builds something."
 
 build_b:
   tags:
-    - ubuntu
+    - clean
   stage: build
   script:
     - echo "This job builds something else."
 
 test_a:
   tags:
-    - ubuntu
+    - clean
   stage: test
   script:
     - echo "This job tests something. It will only run when all jobs in the"
@@ -28,7 +28,7 @@ test_a:
 
 test_b:
   tags:
-    - ubuntu
+    - clean
   stage: test
   script:
     - echo "This job tests something else. It will only run when all jobs in the"
