@@ -3,10 +3,15 @@ stages:
   - test
 
 # image: alpine
-
-build_a:
+default:
   tags:
     - clean
+  image: ubuntu:20.04
+  services:
+    name: nginx
+    alias: mock
+
+build_a:
   image: golang:latest
   stage: build
   script:
@@ -20,34 +25,26 @@ build_a:
 
 
 build_b:
-  tags:
-    - clean
   stage: build
   script:
     - echo "This job builds something else."
-    - sleep 1000
+    - docker ps -a
+    - curl -i mock
 
 build_c:
-  parallel: 3
-  tags:
-    - clean
+  parallel: 2
   image: alpine:latest
   stage: build
   script:
     echo "final build step running.."
-    - sleep 1000
   
 test_a:
-  tags:
-    - clean
   stage: test
   script:
     - echo "This job tests something. It will only run when all jobs in the"
     - echo "build stage are complete."
 
 test_b:
-  tags:
-    - clean
   stage: test
   script:
     - echo "This job tests something else. It will only run when all jobs in the"
