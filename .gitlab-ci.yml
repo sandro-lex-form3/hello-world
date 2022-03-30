@@ -32,7 +32,7 @@ build_b:
   script:
     - echo "This job builds something else."
     - apt-get update -y
-    - apt-get install docker.io
+    - apt-get install -y docker.io
     - docker ps -a
     - curl -i mock
 
