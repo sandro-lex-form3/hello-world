@@ -5,6 +5,8 @@ stages:
 # image: alpine
 
 build_a:
+  tags:
+    - ubuntu
   stage: build
   script:
     - echo "This job builds something."
